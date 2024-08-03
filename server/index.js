@@ -17,7 +17,7 @@ const app = express()
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(cors({
-    origin: 'https://assignment-car-f4hl.vercel.app/', // Adjust to your front-end origin
+    origin: 'https://assignment-car-f4hl.vercel.app', // Adjust to your front-end origin
     credentials: true
 }));
 
@@ -32,7 +32,7 @@ app.use(session({
         secure: true, 
         maxAge: 1000 * 60 * 60, // Session duration
         sameSite:'None',
-        //domain: 'https://assignment-car-f4hl.vercel.app'
+        domain: 'https://assignment-car-f4hl.vercel.app'
     }
 }));
 
