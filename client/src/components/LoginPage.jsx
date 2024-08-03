@@ -9,36 +9,43 @@ function LoginPage() {
     const navigate = useNavigate();
     const baseUrl = 'https://assignment-car.vercel.app';
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post('https://assignment-car.vercel.app/login', { email, password }, {
-            withCredentials: true 
-        })
-            .then(response => {
-                console.log(response.data);
-                if (response.data.message === 'Success') {
-                    if (response.data.role === 'user') {
+
+        try {
+            const response = await fetch('https://assignment-car.vercel.app/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include', // Equivalent to `withCredentials: true` in axios
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                if (data.message === 'Success') {
+                    if (data.role === 'user') {
                         navigate("/api/user");
-                    } else if (response.data.role === 'admin') {
+                    } else if (data.role === 'admin') {
                         navigate("/api/admin");
                     } else {
-                        console.log('Unknown role:', response.data.role);
+                        console.log('Unknown role:', data.role);
                     }
                 } else {
-                    alert(response.data.message); // Display error message
+                    alert(data.message); // Display error message
                 }
-            })
-            .catch(error => {
-                console.error('Error logging in:', error); // Improved error handling
-                if (error.response) {
-                    console.error('Server responded with a status code outside 2xx range:', error.response.data);
-                } else if (error.request) {
-                    console.error('No response received from server:', error.request);
-                } else {
-                    console.error('Error setting up request:', error.message);
-                }
-            });
+            } else {
+                console.error('Server responded with an error:', data);
+                alert('An error occurred: ' + data.message); // Display server error message
+            }
+        } catch (error) {
+            console.error('Error logging in:', error); // Improved error handling
+            alert('An error occurred: ' + error.message); // Display error message
+        }
     };
+
 
     return (
         <>
