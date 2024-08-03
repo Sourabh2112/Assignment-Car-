@@ -106,7 +106,7 @@ app.post("/logout", (req, res) => {
     });
 });
 
-app.use("/api", isAuthenticated, carRouter);
+app.use("/api", carRouter);
 
 mongoose.connect(DB)
     .then(() => {
