@@ -5,20 +5,23 @@ import { useNavigate } from 'react-router-dom';
 
 function UserHomePage() {
     const [cars, setCars] = useState([]);
-    const apiUrl = 'https://assignment-car.vercel.app/api/cars';
+    // const apiUrl = 'https://assignment-car.vercel.app/api/cars';
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(apiUrl, {
-            withCredentials : 'true'
+        fetch('https://assignment-car.vercel.app/api/cars', {
+            method: 'GET',
+            credentials: 'include'  // Use 'include' instead of 'true' for withCredentials
         })
-            .then(response => {
-                setCars(response.data);
+            .then(response => response.json())
+            .then(data => {
+                setCars(data);
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
+
 
     const handleLogout = (e) => {
         e.preventDefault();
