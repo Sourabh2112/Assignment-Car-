@@ -1,0 +1,135 @@
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.options {
+  display: grid;
+  margin-top: 20px;
+}
+
+.options button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.options button:hover {
+  background-color: #3e8e41;
+}
+
+
+/* login page css */
+.login-page {
+  max-width: 300px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-page h2 {
+  margin-top: 0;
+}
+
+.login-page label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login-page input {
+  width: 80%;
+  height: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.loginPage-btn {
+  width: 100%;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-account-btn {
+  width: 100%;
+  margin-left: 5px;
+  background-color: #337ab7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.create-account-btn:hover {
+  opacity: 0.8;
+}
+
+
+/* createaccount page css */
+.create-account-page {
+  max-width: 300px;
+  margin: 40px auto;
+  padding: 50px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-account-page h2 {
+  margin-top: 0;
+}
+
+.create-account-page label {
+  display: grid;
+  margin-bottom: 2px;
+}
+
+.create-account-page input {
+  width: 95%;
+  height: 20px;
+  margin-bottom: 2px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.create-account-page select {
+  width: 101%;
+  height: 40px;
+  margin-bottom: 2px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.signup-btn,
+.login-btn {
+  width: 100%;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-btn:hover,
+.login-btn:hover {
+  opacity: 0.8;
+}
+/* 
+.signup-btn {
+  margin-right: 0px;
+} */

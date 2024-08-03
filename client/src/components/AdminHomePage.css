@@ -1,0 +1,41 @@
+.admin-homepage {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 2rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-homepage h2 {
+    margin-top: 0;
+}
+
+.admin-homepage form {
+    margin-bottom: 0px;
+}
+
+.admin-homepage label {
+    display: grid;
+    margin-bottom: 0px;
+}
+
+.admin-homepage input[type="text"],
+.admin-homepage input[type="number"] {
+    width: auto;
+    padding: 8px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+}
+
+.admin-homepage button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 30px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
