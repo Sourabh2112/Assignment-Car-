@@ -25,17 +25,17 @@ function UserHomePage() {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3001/logout', {}, { withCredentials: true })
-            .then(response => {
-                if (response.data.message === 'Logout successful') {
+      //  axios.post('http://localhost:3001/logout', {}, { withCredentials: true })
+           // .then(response => {
+               // if (response.data.message === 'Logout successful') {
                     navigate("/");
-                } else {
-                    alert(response.data.message);
-                }
-            })
-            .catch(error => {
+              //  } else {
+              //      alert(response.data.message);
+             //   }
+           // })
+          //  .catch(error => {
                 console.error('Error logging in:', error);
-            });
+          //  });
     }
 
     return (
