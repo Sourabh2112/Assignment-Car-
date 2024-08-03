@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 function UserHomePage() {
     const [cars, setCars] = useState([]);
-    // const apiUrl = 'https://assignment-car.vercel.app/api/cars';
+    const baseUrl = 'https://assignment-car.vercel.app';
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://assignment-car.vercel.app/api/cars', {
+        fetch(`${baseUrl}/api/cars`, {
             method: 'GET',
             credentials: 'include'  // Use 'include' instead of 'true' for withCredentials
         })
@@ -45,7 +45,7 @@ function UserHomePage() {
             <div>
                 <main>
                     <h1>Cars</h1>
-{/*                     <button onClick={handleLogout} className='button'>Logout</button> */}
+                    <button onClick={handleLogout} className='button'>Logout</button>
                     <table id="car-list">
                         <thead>
                             <tr>

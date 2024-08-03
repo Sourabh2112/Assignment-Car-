@@ -9,30 +9,43 @@ function AdminHomePage() {
     const [newCar, setNewCar] = useState({ name: '', year: '', price: '' });
     const [editRecordId, setEditRecordId] = useState(null);
 
-    const apiUrl = 'https://assignment-car.vercel.app/api/cars';
     const navigate = useNavigate();
 
+    const baseUrl = 'https://assignment-car.vercel.app';
+
     useEffect(() => {
-        axios.get(apiUrl, {
-            withCredentials: 'true'
+        fetch(`${baseUrl}/api/cars`, {
+            credentials: 'include' 
         })
             .then(response => {
-                setCars(response.data);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setCars(data);
             })
             .catch(error => {
-                console.error(error);
+                console.error('Error:', error);
             });
     }, []);
 
     const getdata = async () => {
-        axios.get(apiUrl, {
-            withCredentials: 'true'
+        fetch(`${baseUrl}/api/cars`, {
+            credentials: 'include'
         })
             .then(response => {
-                setCars(response.data);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setCars(data);
             })
             .catch(error => {
-                console.error(error);
+                console.error('Error:', error);
             });
     };
 
@@ -46,7 +59,7 @@ function AdminHomePage() {
     };
 
     const handleCreateCar = () => {
-        fetch('https://assignment-car.vercel.app/api/cars', {
+        fetch(`${baseUrl}/api/cars`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newCar),
@@ -69,7 +82,7 @@ function AdminHomePage() {
 
 
     const handleDeleteCar = (id) => {
-        fetch(`https://assignment-car.vercel.app/api/cars/${id}`, {
+        fetch(`${ baseUrl }/api/cars/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         })
@@ -91,7 +104,7 @@ function AdminHomePage() {
 
 
     const editRecord = (id, updatedData) => {
-        fetch(`https://assignment-car.vercel.app/api/cars/${id}`, {
+        fetch(`${baseUrl}/api/cars/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +133,7 @@ function AdminHomePage() {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        axios.post('https://assignment-car.vercel.app/logout', {}, { withCredentials: true })
+        axios.post(`${baseUrl}/logout`, {}, { withCredentials: true })
             .then(response => {
                 if (response.data.message === 'Logout successful') {
                     navigate("/");
@@ -132,7 +145,6 @@ function AdminHomePage() {
                 console.error('Error logging in:', error);
             });
     }
-
 
     return (
         <>
@@ -169,7 +181,7 @@ function AdminHomePage() {
                     </label>
                     <br />
                     <button>Create Car</button>
-{/*                     <button onClick={handleLogout}>Logout</button> */}
+                    <button onClick={handleLogout}>Logout</button>
                 </form>
                 {/* 
             <h3>Car Records</h3>

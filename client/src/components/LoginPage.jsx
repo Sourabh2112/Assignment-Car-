@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const baseUrl = 'https://assignment-car.vercel.app';
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://assignment-car.vercel.app/login', { email, password }, {
+        axios.post(`${baseUrl}/login`, { email, password }, {
             withCredentials: true 
         })
             .then(response => {

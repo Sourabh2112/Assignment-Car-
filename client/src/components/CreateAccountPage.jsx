@@ -10,9 +10,11 @@ function CreateAccountPage() {
     const [password, setPassword] = useState();
     const navigate = useNavigate()
 
+    const baseUrl = 'https://assignment-car.vercel.app';
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('https://assignment-car.vercel.app/register', { name, role, email, password })
+        axios.post(`${baseUrl}/register`, { name, role, email, password })
             .then(result => {
                 console.log(result)
                 navigate('/login')
