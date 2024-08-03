@@ -6,6 +6,7 @@ const carRouter = require('./routes/carRoute')
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const MongoStore = require('connect-mongo');
 const key = 'dfgbnsthgse34g';
 
 const PORT = 3001;
@@ -29,11 +30,15 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: true, 
+        secure: true,
         maxAge: 1000 * 60 * 60, // Session duration
-      //  sameSite:'None',
+        sameSite: 'None',
         //domain: 'https://assignment-car-f4hl.vercel.app'
-    }
+    },
+    store: MongoStore.create({
+        mongoUrl: DB,
+        mongooseConnection: mongoose.connection
+    })
 }));
 
 // Middleware to check if user is authenticated
