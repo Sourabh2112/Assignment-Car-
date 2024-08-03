@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UserHomePage() {
     const [cars, setCars] = useState([]);
-    const apiUrl = 'http://localhost:3001/api/cars';
+    const apiUrl = 'https://assignment-car.vercel.app/api/cars';
     const navigate = useNavigate();
 
     useEffect(() => {

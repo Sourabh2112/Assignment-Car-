@@ -12,7 +12,7 @@ function CreateAccountPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/register', { name, role, email, password })
+        axios.post('https://assignment-car.vercel.app/register', { name, role, email, password })
             .then(result => {
                 console.log(result)
                 navigate('/login')

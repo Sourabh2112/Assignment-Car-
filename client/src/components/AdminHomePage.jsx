@@ -9,7 +9,7 @@ function AdminHomePage() {
     const [newCar, setNewCar] = useState({ name: '', year: '', price: '' });
     const [editRecordId, setEditRecordId] = useState(null);
 
-    const apiUrl = 'http://localhost:3001/api/cars';
+    const apiUrl = 'https://assignment-car.vercel.app/api/cars';
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,7 +46,7 @@ function AdminHomePage() {
     };
 
     const handleCreateCar = () => {
-        fetch('http://localhost:3001/api/cars', {
+        fetch('https://assignment-car.vercel.app/api/cars', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newCar),
@@ -69,7 +69,7 @@ function AdminHomePage() {
 
 
     const handleDeleteCar = (id) => {
-        fetch(`http://localhost:3001/api/cars/${id}`, {
+        fetch(`https://assignment-car.vercel.app/api/cars/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         })
@@ -91,7 +91,7 @@ function AdminHomePage() {
 
 
     const editRecord = (id, updatedData) => {
-        fetch(`http://localhost:3001/api/cars/${id}`, {
+        fetch(`https://assignment-car.vercel.app/api/cars/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ function AdminHomePage() {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3001/logout', {}, { withCredentials: true })
+        axios.post('https://assignment-car.vercel.app/logout', {}, { withCredentials: true })
             .then(response => {
                 if (response.data.message === 'Logout successful') {
                     navigate("/");
