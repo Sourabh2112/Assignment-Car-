@@ -31,7 +31,8 @@ app.use(session({
         httpOnly: true,
         secure: true, 
         maxAge: 1000 * 60 * 60, // Session duration
-        domain: 'https://assignment-car-f4hl.vercel.app'
+        sameSite:'None',
+        //domain: 'https://assignment-car-f4hl.vercel.app'
     }
 }));
 
