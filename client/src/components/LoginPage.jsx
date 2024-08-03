@@ -11,7 +11,7 @@ function LoginPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${baseUrl}/login`, { email, password }, {
+        axios.post('https://assignment-car.vercel.app/login', { email, password }, {
             withCredentials: true 
         })
             .then(response => {
