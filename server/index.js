@@ -8,6 +8,7 @@ const session = require('express-session');
 const key = 'dfgbnsthgse34g';
 
 const PORT = 3001;
+const DB = 'mongodb+srv://sourabh2112:Sk%4012344321@cluster0.itsazuw.mongodb.net/Cars?retryWrites=true&w=majority&appName=Cluster0';
 
 
 const app = express()
@@ -45,12 +46,29 @@ const logSessionMiddleware = (req, res, next) => {
     next();
 };
 
-app.post("/register", (req, res) => {
-    const data = req.body;
-    ClientModel.create(data)
-        .then(client => res.json(client))
-        .catch(err => res.json(err))
-})
+app.post("/register", async (req, res) => {
+    const { email, ...otherData } = req.body;
+
+    // Check if email is provided
+    if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+    }
+
+    try {
+        // Check if the email already exists
+        const existingClient = await ClientModel.findOne({ email });
+        if (existingClient) {
+            return res.status(400).json({ message: "Email already registered" });
+        }
+
+        // Create new client
+        const newClient = await ClientModel.create({ email, ...otherData });
+        res.status(201).json(newClient);
+    } catch (err) {
+        res.status(500).json({ message: "Internal Server Error", error: err.message });
+    }
+});
+
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -90,7 +108,7 @@ app.post("/logout", (req, res) => {
 
 app.use("/api", isAuthenticated, carRouter);
 
-mongoose.connect("mongodb://127.0.0.1:27017/Cars")
+mongoose.connect(DB)
     .then(() => {
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
