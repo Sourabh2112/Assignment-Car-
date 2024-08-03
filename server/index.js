@@ -14,7 +14,7 @@ const DB = 'mongodb+srv://sourabh2112:Sk%4012344321@cluster0.itsazuw.mongodb.net
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust to your front-end origin
+    origin: 'https://assignment-car-f4hl.vercel.app', // Adjust to your front-end origin
     credentials: true
 }));
 
