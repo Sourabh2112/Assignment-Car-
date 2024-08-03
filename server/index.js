@@ -23,18 +23,18 @@ app.use(cors({
 
 
 // Configure session middleware
-app.use(session({
-    secret: key,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        secure: true, 
-        maxAge: 1000 * 60 * 60, // Session duration
-        sameSite:'None',
-        domain: 'https://assignment-car-f4hl.vercel.app'
-    }
-}));
+//app.use(session({
+   // secret: key,
+//    resave: false,
+//    saveUninitialized: true,
+//    cookie: {
+      //  httpOnly: true,
+      //  secure: true, 
+     //   maxAge: 1000 * 60 * 60, // Session duration
+      //  sameSite:'None',
+        //domain: 'https://assignment-car-f4hl.vercel.app'
+  //  }
+//}));
 
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
@@ -105,7 +105,7 @@ app.post("/logout", (req, res) => {
     });
 });
 
-app.use("/api", isAuthenticated, carRouter);
+app.use("/api", carRouter);
 
 mongoose.connect(DB)
     .then(() => {
