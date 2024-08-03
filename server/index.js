@@ -5,13 +5,16 @@ const ClientModel = require('./models/Clients')
 const carRouter = require('./routes/carRoute')
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const key = 'dfgbnsthgse34g';
 
 const PORT = 3001;
 const DB = 'mongodb+srv://sourabh2112:Sk%4012344321@cluster0.itsazuw.mongodb.net/Cars?retryWrites=true&w=majority&appName=Cluster0';
+// const localDB = 'mongodb://localhost:27017/Cars'
 
 
 const app = express()
+app.use(bodyParser.json());
 app.use(express.json())
 app.use(cors({
     origin: 'https://assignment-car-f4hl.vercel.app', // Adjust to your front-end origin
@@ -26,8 +29,9 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: true, // Set to true if using HTTPS
-        maxAge: 1000 * 60 * 60 // Session duration
+        secure: true, 
+        maxAge: 1000 * 60 * 60, // Session duration
+        domain: 'https://assignment-car.vercel.app'
     }
 }));
 // app.use(logSessionMiddleware);
@@ -106,7 +110,7 @@ app.post("/logout", (req, res) => {
     });
 });
 
-app.use("/api", carRouter);
+app.use("/api", isAuthenticated, carRouter);
 
 mongoose.connect(DB)
     .then(() => {
