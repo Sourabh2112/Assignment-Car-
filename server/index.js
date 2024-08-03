@@ -38,7 +38,7 @@ app.use(session({
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) {
-        console.log(req.session);
+        res.send({req.session});
         next();
     } else {
         res.status(401).json({ message: "Access denied. Please log in." });
@@ -86,9 +86,8 @@ app.post("/login", async (req, res) => {
             return res.status(401).json({ message: "Password incorrect!!!" });
         }
 
-        console.log(req.session.user);
         req.session.user = user;
-        res.status(200).json({ message: "Success", role: user.role });
+        res.status(200).json({ message: "Success", role: user.role, session: req.session.user });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error });
     }
