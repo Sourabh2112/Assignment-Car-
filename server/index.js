@@ -34,20 +34,15 @@ app.use(session({
         domain: 'https://assignment-car.vercel.app'
     }
 }));
-// app.use(logSessionMiddleware);
 
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) {
+        console.log(req.session);
         next();
     } else {
         res.status(401).json({ message: "Access denied. Please log in." });
     }
-};
-
-const logSessionMiddleware = (req, res, next) => {
-    console.log('Session:', req.session);
-    next();
 };
 
 app.post("/register", async (req, res) => {
@@ -91,6 +86,7 @@ app.post("/login", async (req, res) => {
             return res.status(401).json({ message: "Password incorrect!!!" });
         }
 
+        console.log(req.session.user);
         req.session.user = user;
         res.status(200).json({ message: "Success", role: user.role });
     } catch (error) {
