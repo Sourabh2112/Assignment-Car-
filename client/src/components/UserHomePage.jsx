@@ -34,7 +34,7 @@ function UserHomePage() {
              //   }
            // })
           //  .catch(error => {
-                console.error('Error logging in:', error);
+               // console.error('Error logging in:', error);
           //  });
     }
 
