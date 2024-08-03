@@ -45,7 +45,7 @@ function UserHomePage() {
             <div>
                 <main>
                     <h1>Cars</h1>
-                    <button onClick={handleLogout} className='button'>Logout</button>
+{/*                     <button onClick={handleLogout} className='button'>Logout</button> */}
                     <table id="car-list">
                         <thead>
                             <tr>
