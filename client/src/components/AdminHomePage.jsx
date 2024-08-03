@@ -169,7 +169,7 @@ function AdminHomePage() {
                     </label>
                     <br />
                     <button>Create Car</button>
-                    <button onClick={handleLogout}>Logout</button>
+{/*                     <button onClick={handleLogout}>Logout</button> */}
                 </form>
                 {/* 
             <h3>Car Records</h3>
