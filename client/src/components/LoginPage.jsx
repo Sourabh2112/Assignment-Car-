@@ -11,35 +11,39 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await fetch('https://assignment-car.vercel.app/login', {
-                method: 'POST',
+            axios.post(`${baseUrl}/login`, { email, password }, {
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                credentials: 'include', // Equivalent to `withCredentials: true` in axios
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                if (data.message === 'Success') {
-                    if (data.role === 'user') {
-                        navigate("/api/user");
-                    } else if (data.role === 'admin') {
-                        navigate("/api/admin");
-                    } else {
-                        console.log('Unknown role:', data.role);
-                    }
-                } else {
-                    alert(data.message); // Display error message
                 }
-            } else {
-                console.error('Server responded with an error:', data);
-                alert('An error occurred: ' + data.message); // Display server error message
-            }
+            })
+                .then(response => {
+                    const data = response.data;
+                    if (data.success) {
+                        if (data.role === 'user') {
+                            navigate("/api/user");
+                        } else if (data.role === 'admin') {
+                            navigate("/api/admin");
+                        } else {
+                            console.log('Unknown role:', data.role);
+                        }
+                    } else {
+                        alert(data.message); // Display error message
+                    }
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.error('Server responded with an error:', error.response.data);
+                        alert('An error occurred: ' + error.response.data.message); // Display server error message
+                    } else if (error.request) {
+                        console.error('No response received from server:', error.request);
+                        alert('No response received from server.');
+                    } else {
+                        console.error('Error setting up request:', error.message);
+                        alert('An error occurred: ' + error.message); // Display error message
+                    }
+                });
         } catch (error) {
             console.error('Error logging in:', error); // Improved error handling
             alert('An error occurred: ' + error.message); // Display error message

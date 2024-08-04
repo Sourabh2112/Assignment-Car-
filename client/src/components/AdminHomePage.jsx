@@ -131,20 +131,19 @@ function AdminHomePage() {
             });
     };
 
-    const handleLogout = (e) => {
+    const handleLogout = async (e) => {
         e.preventDefault();
-        axios.post(`${baseUrl}/logout`, {}, { withCredentials: true })
-            .then(response => {
-                if (response.data.message === 'Logout successful') {
-                    navigate("/");
-                } else {
-                    alert(response.data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error logging in:', error);
+        try {
+            await axios.post(`${baseUrl}/logout`, {}, {
+                withCredentials: true,
             });
+            localStorage.removeItem('token'); // If you store the token in local storage
+            navigate('/login'); // Redirect to login page or wherever you want
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
     }
+
 
     return (
         <>
@@ -152,7 +151,7 @@ function AdminHomePage() {
             <h2>Admin Homepage</h2>
             <div className="admin-homepage">
                 <h3>Create New Car</h3>
-                <form onSubmit={handleCreateCar}>
+                <form>
                     <label>
                         Car Name:
                         <input
@@ -180,7 +179,7 @@ function AdminHomePage() {
                         />
                     </label>
                     <br />
-                    <button>Create Car</button>
+                    <button on onClick={handleCreateCar}>Create Car</button>
                     <button onClick={handleLogout}>Logout</button>
                 </form>
                 {/* 

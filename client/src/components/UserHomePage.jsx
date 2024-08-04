@@ -23,19 +23,17 @@ function UserHomePage() {
     }, []);
 
 
-    const handleLogout = (e) => {
+    const handleLogout = async (e) => {
         e.preventDefault();
-      //  axios.post('http://localhost:3001/logout', {}, { withCredentials: true })
-           // .then(response => {
-               // if (response.data.message === 'Logout successful') {
-                    navigate("/");
-              //  } else {
-              //      alert(response.data.message);
-             //   }
-           // })
-          //  .catch(error => {
-               // console.error('Error logging in:', error);
-          //  });
+        try {
+            await axios.post(`${baseUrl}/logout`, {}, {
+                withCredentials: true,
+            });
+            localStorage.removeItem('token'); // If you store the token in local storage
+            navigate('/login'); // Redirect to login page or wherever you want
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
     }
 
     return (
